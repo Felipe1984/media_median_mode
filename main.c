@@ -4,10 +4,10 @@
 #define SIZE_FREQUENCY 10
 
 void mean(const int answer[]);
-// void median(int answer[]);
+void median(int answer[]);
 // void mode(int freq[], const int answer[]);
-// void bubbleSort(int a[]);
-// void printArray(const int a[]);
+void bubbleSort(int a[]);
+void printArray(const int a[]);
 
 int main() {
     int frequency[SIZE_FREQUENCY] = { 0 };
@@ -25,7 +25,7 @@ int main() {
     };
 
     mean(response);
-    // median(response);
+    median(response);
     // mode(frequency, response);
 
     return 0;
@@ -56,4 +56,50 @@ void mean(const int answer[]) {
         SIZE_RESPONSE,
         (double) total / SIZE_RESPONSE
     );
+}
+
+void median(int answer[]) {
+    printf(
+        "\n%s\n%s\n%s\n%s",
+        "******************************",
+        " Mediana",
+        "******************************",
+        "O array de respostas, não ordenado, é"
+    );
+
+    printArray(answer);
+    bubbleSort(answer);
+
+    printf(
+        "\n\vA mediana é o elemento %d do\n"
+        "array ordenado de %d elementos.\n"
+        "Para essa execução, a mediana é %d\n\n",
+        SIZE_RESPONSE / 2, SIZE_RESPONSE, answer[SIZE_RESPONSE / 2]
+    );
+}
+
+void bubbleSort(int a[]) {
+    int pass, j, hold;
+
+    for (pass = 1; pass < SIZE_RESPONSE; pass++) {
+        for (j = 0; j < SIZE_RESPONSE - 1; j++) {
+            if (a[j] > a[j + 1]) {
+                hold = a[j];
+                a[j] = a[j + 1];
+                a[j + 1] = hold;
+            }
+        }
+    }
+}
+
+void printArray(const int a[]) {
+    int j;
+
+    for (j = 0; j < SIZE_RESPONSE; j++) {
+        if (j % 20 == 0) {
+            printf("\n");
+        }
+
+        printf("%2d", a[j]);
+    }
 }
