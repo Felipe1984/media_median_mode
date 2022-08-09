@@ -5,7 +5,7 @@
 
 void mean(const int answer[]);
 void median(int answer[]);
-// void mode(int freq[], const int answer[]);
+void mode(int freq[], const int answer[]);
 void bubbleSort(int a[]);
 void printArray(const int a[]);
 
@@ -26,7 +26,7 @@ int main() {
 
     mean(response);
     median(response);
-    // mode(frequency, response);
+    mode(frequency, response);
 
     return 0;
 }
@@ -77,6 +77,53 @@ void median(int answer[]) {
         SIZE_RESPONSE / 2, SIZE_RESPONSE, answer[SIZE_RESPONSE / 2]
     );
 }
+
+void mode(int freq[], const int answer[]) {
+    int rating, j, h, largest = 0, modeValue = 0;
+
+    printf(
+        "\n%s\n%s\n%s\n",
+        "******************************",
+        " Moda",
+        "******************************"
+    );
+
+    for (j = 0; j < SIZE_RESPONSE; j++) {
+        ++freq[answer[j]];
+    }
+
+    printf(
+        "%s%11s%19s\n\n%54s\n%54s\n\n",
+        "Resposta",
+        "Frequência",
+        "Histograma",
+        "1  1   2   2",
+        "5  0   5   0   5"
+    );
+
+    for (rating = 1; rating < SIZE_FREQUENCY; rating++) {
+        printf("%8d%11d", rating, freq[rating]);
+
+        if (freq[rating] > largest) {
+            largest = freq[rating];
+            modeValue = rating;
+        }
+
+        for (h = 1; h <= freq[rating]; h++) {
+            printf("*");
+        }
+
+        printf("\n");
+
+        printf(
+            "A moda é o valor mais frequente. \n"
+            "Para essa execução, a moda é %d, que ocorreu"
+            "%d vezes.\n",
+            modeValue,
+            largest
+        );
+    }
+}   
 
 void bubbleSort(int a[]) {
     int pass, j, hold;
